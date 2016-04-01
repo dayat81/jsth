@@ -7,6 +7,13 @@
 <title>Guests</title>
 </head>
 <body>
+	<div class="search-block">
+		<input type="text" id="searchSurname" name="searchSurname"/>
+		<br />
+		<label for="searchSurname" th:text="#{search.label}">Search label:</label>
+		
+		<button id="searchButton" name="searchButton" onclick="retrieveGuests()" type="button" th:text="#{search.button}">Search button</button>
+	</div>
 	<div th:fragment="resultsList" class="container" id="resultsBlock">
 		<div class="row">
 			<h1>Guests</h1>
@@ -21,8 +28,8 @@
 				</tr>
 				<tr th:each="guest,iterationStatus : ${guests}">
 					<td th:text="${iterationStatus.count+(selectedPageSize*guests.getNumber())}"></td>
-					<td th:text="${guest.name}"></td>
-					<td th:text="${guest.surname}"></td>
+					<td th:text="${guest.firstName}"></td>
+					<td th:text="${guest.lastName}"></td>
 					<td th:text="${guest.country}"></td>
 				</tr>
 			</table>

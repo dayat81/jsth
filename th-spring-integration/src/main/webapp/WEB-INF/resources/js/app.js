@@ -19,3 +19,13 @@ function ajaxReq(url){
 	var selectedPageSize = $('#pageSizeSelect').val();
 	$("#resultsBlock").load(url+"&pageSize="+selectedPageSize);
 }
+
+function retrieveGuests() {
+	var url = '/th/guest/ajax';
+	
+	if ($('#searchSurname').val() != '') {
+		url = url + '/' + $('#searchSurname').val();
+	}
+	
+	$("#resultsBlock").load(url);
+}
