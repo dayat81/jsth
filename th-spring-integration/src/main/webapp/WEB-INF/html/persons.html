@@ -14,11 +14,13 @@
 		<div class="row">
 			<table class="table">
 				<tr>
+					<th>No</th>
 					<th>First name</th>
 					<th>Last name</th>
 					<th>Age</th>
 				</tr>
-				<tr th:each="person : ${persons}">
+				<tr th:each="person,iterationStatus : ${persons}">
+					<td th:text="${iterationStatus.count+(selectedPageSize*persons.getNumber())}"></td>
 					<td th:text="${person.firstName}"></td>
 					<td th:text="${person.lastName}"></td>
 					<td th:text="${person.age}"></td>
