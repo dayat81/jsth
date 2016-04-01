@@ -31,4 +31,9 @@ public class PersonServiceImpl implements PersonService {
 		return personRepository.save(persons);
 	}
 
+	@Transactional
+	@Override
+	public void deleteAll(){
+		personRepository.deleteAll();
+	}
 }

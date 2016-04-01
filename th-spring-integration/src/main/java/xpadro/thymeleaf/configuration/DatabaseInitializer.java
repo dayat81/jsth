@@ -28,7 +28,7 @@ public class DatabaseInitializer {
 		Person fourthPerson = new Person("Angela", "Merkel", 60);
 		Person fifthPerson = new Person("David", "Cameron", 60);
 		Person sixthPerson = new Person(" Alexander", "Lukashenko", 60);
-
+		personService.deleteAll();
 		personService.save(Arrays.asList(firstPerson, secondPerson, thirdPerson, fourthPerson, fifthPerson, sixthPerson));
 	}
 

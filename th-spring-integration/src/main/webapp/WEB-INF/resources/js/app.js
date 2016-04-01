@@ -1,10 +1,11 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
 	changePageAndSize();
 });
 
 function changePageAndSize() {
 	$('#pageSizeSelect').change(function(evt) {
-		window.location.replace("/th/?pageSize=" + this.value);
+		//window.location.replace("/th/ajax/?pageSize=" + this.value);
+		ajaxReq("/th/ajax/?pageSize=" + this.value);
 	});
 
 	$('.pageLink').click(function(evt) {
@@ -12,8 +13,9 @@ function changePageAndSize() {
 		this.href = this.href.replace("?page=", '?pageSize=' + selectedPageSize + '&page=');
 
 	});
-}
+} */
 
 function ajaxReq(url){
-	$("#resultsBlock").load(url);
+	var selectedPageSize = $('#pageSizeSelect').val();
+	$("#resultsBlock").load(url+"&pageSize="+selectedPageSize);
 }

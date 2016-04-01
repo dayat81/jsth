@@ -23,5 +23,7 @@ public interface PersonService {
 	 * @return collection of persons
 	 */
 	Iterable<Person> save(Iterable<Person> persons);
+	
+	void deleteAll();
 
 }
