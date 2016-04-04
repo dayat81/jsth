@@ -14,14 +14,16 @@ function changePageAndSize() {
 
 	});
 } */
+var path = window.location.href.split("/")[3];
 
 function ajaxReq(url){
+	url='/'+path+url;
 	var selectedPageSize = $('#pageSizeSelect').val();
 	$("#resultsBlock").load(url+"&pageSize="+selectedPageSize);
 }
 
 function retrieveGuests() {
-	var url = '/th/guest/ajax';
+	var url = '/'+path+'/guest/ajax';
 	
 	if ($('#searchSurname').val() != '') {
 		url = url + '/' + $('#searchSurname').val();
