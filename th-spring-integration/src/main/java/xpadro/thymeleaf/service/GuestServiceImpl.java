@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import xpadro.thymeleaf.model.GuestDTO;
+import xpadro.thymeleaf.model.Guest;
 import xpadro.thymeleaf.repository.GuestRepository;
 
 @Service
@@ -21,13 +21,17 @@ public class GuestServiceImpl implements GuestService {
 
 	@Transactional
 	@Override
-	public Page<GuestDTO> findAllPageable(Pageable pageable) {
+	public Page<Guest> findAllPageable(Pageable pageable) {
 		return personRepository.findAll(pageable);
 	}
-
 	@Transactional
 	@Override
-	public Iterable<GuestDTO> save(Iterable<GuestDTO> persons) {
+	public Page<Guest> findBySurname(String surname,Pageable pageable) {
+		return personRepository.findBySurname(surname,pageable);
+	}
+	@Transactional
+	@Override
+	public Iterable<Guest> save(Iterable<Guest> persons) {
 		return personRepository.save(persons);
 	}
 

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import xpadro.thymeleaf.model.Guest;
-import xpadro.thymeleaf.model.GuestDTO;
 import xpadro.thymeleaf.model.Pager;
 import xpadro.thymeleaf.service.GuestService;
 import xpadro.thymeleaf.service.HotelService;
@@ -52,23 +51,23 @@ public class GuestController {
 		// param. decreased by 1.
 		int evalPage = (page == null || page < 1) ? INITIAL_PAGE : page - 1;
 
-		guestService.deleteAll();
-		List<Guest> lg =  hotelService.getGuestsList();
-		List<GuestDTO> lgdto= new ArrayList<GuestDTO>();
-		for (Iterator<Guest> iterator = lg.iterator(); iterator.hasNext();) {
-			Guest guest = (Guest) iterator.next();
-			GuestDTO gdto = new GuestDTO();
-			System.out.println(guest.getName());
-			gdto.setPersonId(guest.getId());
-			gdto.setFirstName(guest.getName());
-			gdto.setLastName(guest.getSurname());
-			gdto.setCountry(guest.getCountry());
-			lgdto.add(gdto);
-		}
-		guestService.save(lgdto);
+//		guestService.deleteAll();
+//		List<Guest> lg =  hotelService.getGuestsList();
+//		List<GuestDTO> lgdto= new ArrayList<GuestDTO>();
+//		for (Iterator<Guest> iterator = lg.iterator(); iterator.hasNext();) {
+//			Guest guest = (Guest) iterator.next();
+//			GuestDTO gdto = new GuestDTO();
+//			System.out.println(guest.getName());
+//			gdto.setPersonId(guest.getId());
+//			gdto.setFirstName(guest.getName());
+//			gdto.setLastName(guest.getSurname());
+//			gdto.setCountry(guest.getCountry());
+//			lgdto.add(gdto);
+//		}
+//		guestService.save(lgdto);
 
 		
-		Page<GuestDTO> guests = guestService.findAllPageable(new PageRequest(evalPage, evalPageSize));
+		Page<Guest> guests = guestService.findAllPageable(new PageRequest(evalPage, evalPageSize));
 		Pager pager = new Pager(guests.getTotalPages(), guests.getNumber(), BUTTONS_TO_SHOW);
 
 		modelAndView.addObject("guests", guests);
@@ -89,26 +88,27 @@ public class GuestController {
 		// prevent exception), return initial size. Otherwise, return value of
 		// param. decreased by 1.
 		int evalPage = (page == null || page < 1) ? INITIAL_PAGE : page - 1;
-		List<Guest> lg;
-		if(surname.equals("*")){
-			lg =  hotelService.getGuestsList();
-		}else{
-			lg =  hotelService.getGuestsList(surname);
-		}
-		List<GuestDTO> lgdto= new ArrayList<GuestDTO>();
-		for (Iterator<Guest> iterator = lg.iterator(); iterator.hasNext();) {
-			Guest guest = (Guest) iterator.next();
-			GuestDTO gdto = new GuestDTO();
-			System.out.println(guest.getName());
-			gdto.setPersonId(guest.getId());
-			gdto.setFirstName(guest.getName());
-			gdto.setLastName(guest.getSurname());
-			gdto.setCountry(guest.getCountry());
-			lgdto.add(gdto);
-		}
-		guestService.deleteAll();
-		guestService.save(lgdto);
-		Page<GuestDTO> guests = guestService.findAllPageable(new PageRequest(evalPage, evalPageSize));
+//		List<Guest> lg;
+//		if(surname.equals("*")){
+//			lg =  hotelService.getGuestsList();
+//		}else{
+//			lg =  hotelService.getGuestsList(surname);
+//		}
+//		List<GuestDTO> lgdto= new ArrayList<GuestDTO>();
+//		for (Iterator<Guest> iterator = lg.iterator(); iterator.hasNext();) {
+//			Guest guest = (Guest) iterator.next();
+//			GuestDTO gdto = new GuestDTO();
+//			System.out.println(guest.getName());
+//			gdto.setPersonId(guest.getId());
+//			gdto.setFirstName(guest.getName());
+//			gdto.setLastName(guest.getSurname());
+//			gdto.setCountry(guest.getCountry());
+//			lgdto.add(gdto);
+//		}
+//		guestService.deleteAll();
+//		guestService.save(lgdto);
+		
+		Page<Guest> guests = guestService.findBySurname(surname,new PageRequest(evalPage, evalPageSize));
 		Pager pager = new Pager(guests.getTotalPages(), guests.getNumber(), BUTTONS_TO_SHOW);
 
 		model.addAttribute("guests", guests);
@@ -131,7 +131,7 @@ public class GuestController {
 		// param. decreased by 1.
 		int evalPage = (page == null || page < 1) ? INITIAL_PAGE : page - 1;
 
-		Page<GuestDTO> guests = guestService.findAllPageable(new PageRequest(evalPage, evalPageSize));
+		Page<Guest> guests = guestService.findAllPageable(new PageRequest(evalPage, evalPageSize));
 		Pager pager = new Pager(guests.getTotalPages(), guests.getNumber(), BUTTONS_TO_SHOW);
 
 		model.addAttribute("guests", guests);

@@ -3,7 +3,7 @@ package xpadro.thymeleaf.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import xpadro.thymeleaf.model.GuestDTO;
+import xpadro.thymeleaf.model.Guest;
 
 public interface GuestService {
 
@@ -13,8 +13,8 @@ public interface GuestService {
 	 * @param pageable
 	 * @return {@link Page} instance
 	 */
-	Page<GuestDTO> findAllPageable(Pageable pageable);
-
+	Page<Guest> findAllPageable(Pageable pageable);
+	Page<Guest> findBySurname(String surname,Pageable pageable);
 	/**
 	 * Saves collection of persons
 	 * 
@@ -22,7 +22,7 @@ public interface GuestService {
 	 * 
 	 * @return collection of persons
 	 */
-	Iterable<GuestDTO> save(Iterable<GuestDTO> persons);
+	Iterable<Guest> save(Iterable<Guest> persons);
 	
 	void deleteAll();
 

@@ -28,26 +28,26 @@
 				</tr>
 				<tr th:each="guest,iterationStatus : ${guests}">
 					<td th:text="${iterationStatus.count+(selectedPageSize*guests.getNumber())}"></td>
-					<td th:text="${guest.firstName}"></td>
-					<td th:text="${guest.lastName}"></td>
+					<td th:text="${guest.name}"></td>
+					<td th:text="${guest.surname}"></td>
 					<td th:text="${guest.country}"></td>
 				</tr>
 			</table>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-1">
-				<select class="form-control pagination" id="pageSizeSelect" onChange="ajaxReq('/th/guest/ajax/?pageSize=' + this.value)">
+				<select class="form-control pagination" id="pageSizeSelect" onChange="ajaxReq('/guest/ajax/?pageSize=' + this.value)">
 					<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
 				</select>
 			</div>
 			<div th:if="${guests.getTotalPages() != 1}" class="form-group col-md-11 pagination-centered">
 				<ul class="pagination">
-					<li th:class="${guests.getNumber() == 0} ? disabled"><a class="pageLink" th:href="@{javascript:ajaxReq('/th/guest/ajax/?page=1');}">&laquo;</a></li>
-					<li th:class="${guests.getNumber() == 0} ? disabled"><a class="pageLink" href="#" th:onclick="'javascript:ajaxReq(\'/th/guest/ajax/?page=' + ${guests.getNumber()} + '\');'">&larr;</a></li>
+					<li th:class="${guests.getNumber() == 0} ? disabled"><a class="pageLink" th:href="@{javascript:ajaxReq('/guest/ajax/?page=1');}">&laquo;</a></li>
+					<li th:class="${guests.getNumber() == 0} ? disabled"><a class="pageLink" href="#" th:onclick="'javascript:ajaxReq(\'/guest/ajax/?page=' + ${guests.getNumber()} + '\');'">&larr;</a></li>
 					<li th:class="${guests.getNumber() == (page - 1)} ? 'active pointer-disabled'"
-						th:each="page : ${#numbers.sequence(pager.getStartPage(), pager.getEndPage())}"><a class="pageLink" href="#" th:onclick="'javascript:ajaxReq(\'/th/guest/ajax/?page=' + ${page} + '\');'" th:text="${page}"></a></li>
-					<li th:class="${guests.getNumber() + 1 == guests.getTotalPages()} ? disabled"><a class="pageLink" href="#" th:onclick="'javascript:ajaxReq(\'/th/guest/ajax/?page=' + ${guests.getNumber()+2} + '\');'">&rarr;</a></li>
-					<li th:class="${guests.getNumber() + 1 == guests.getTotalPages()} ? disabled"><a class="pageLink" href="#" th:onclick="'javascript:ajaxReq(\'/th/guest/ajax/?page=' + ${guests.getTotalPages()} + '\');'">&raquo;</a></li>
+						th:each="page : ${#numbers.sequence(pager.getStartPage(), pager.getEndPage())}"><a class="pageLink" href="#" th:onclick="'javascript:ajaxReq(\'/guest/ajax/?page=' + ${page} + '\');'" th:text="${page}"></a></li>
+					<li th:class="${guests.getNumber() + 1 == guests.getTotalPages()} ? disabled"><a class="pageLink" href="#" th:onclick="'javascript:ajaxReq(\'/guest/ajax/?page=' + ${guests.getNumber()+2} + '\');'">&rarr;</a></li>
+					<li th:class="${guests.getNumber() + 1 == guests.getTotalPages()} ? disabled"><a class="pageLink" href="#" th:onclick="'javascript:ajaxReq(\'/guest/ajax/?page=' + ${guests.getTotalPages()} + '\');'">&raquo;</a></li>
 				</ul>
 			</div>
 		</div>
