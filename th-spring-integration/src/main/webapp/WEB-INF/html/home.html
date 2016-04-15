@@ -54,7 +54,10 @@
 			<span class="messageContainer" th:unless="${#strings.isEmpty(errorMessage)}" th:text="#{${errorMessage}}"></span>
 		</div>
 	</form>
-
+   <form th:action="@{/fileUpload}" method="post" enctype="multipart/form-data">
+       <input type="file" name="myFile" />
+       <input type="submit" />
+    </form>
 	<!-- Guests list -->
 	<form>
 		<span class="subtitle">Guest list form</span>

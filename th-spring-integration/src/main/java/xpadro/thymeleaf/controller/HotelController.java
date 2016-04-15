@@ -1,5 +1,10 @@
 package xpadro.thymeleaf.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import xpadro.thymeleaf.exception.GuestFoundException;
@@ -32,7 +39,28 @@ public class HotelController {
 	public HotelData prepareHotelDataModel() {
 		return hotelService.getHotelData();
 	}
-
+    @RequestMapping(value = "/fileUpload", method = RequestMethod.POST) 
+    public String importParse(@RequestParam("myFile") MultipartFile myFile) { 
+         // ... do whatever you want with 'myFile' 
+    	InputStream inputStream;
+		try {
+			inputStream = myFile.getInputStream();
+		   	BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+			
+	    	String line;
+	    	while ((line = bufferedReader.readLine()) != null)
+	    	{
+	    	  // do your processing    
+	    		System.out.println(line);
+	    	}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 
+         // Redirect to a successful upload page 
+         return HOME_VIEW; 
+    } 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String showHome(Model model) {
 		prepareHotelDataModel();

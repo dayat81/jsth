@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -18,7 +19,14 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 @ComponentScan("xpadro.thymeleaf")
 @Import(MongoDBConfiguration.class)
 public class WebAppConfiguration extends WebMvcConfigurerAdapter {
-
+	@Bean
+	public CommonsMultipartResolver multipartResolver(){
+	    CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+	    commonsMultipartResolver.setDefaultEncoding("utf-8");
+	    commonsMultipartResolver.setMaxUploadSize(50000000);
+	    return commonsMultipartResolver;
+	}
+	
 	@Bean
 	@Description("Thymeleaf template resolver serving HTML 5")
 	public ServletContextTemplateResolver templateResolver() {
